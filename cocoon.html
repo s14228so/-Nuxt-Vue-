@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cocoon Sample</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="todo">
+  <form @submit.prevent="setMusic(songs)" action="" method="get" class="form-example">
+    <h1>Cocoon Sample</h1>
+    <div v-for="(song, index) in songs">
+        {{index + 1}}: {{song.title}}
+         <input type="button" @click="remove(index)" value="曲を削除" />
+    </div>
+    <input type="text" v-model="title" value="add todo" />
+    <input type="button" @click="addTodo(title)" value="曲を追加" />
+    <hr/>
+     <input type="submit" value="complete!">
+  </form>
+</div>
+
+  
+</body>
+<script>
+    var app = new Vue({
+        el: '#todo',
+        data: {
+        title: "",
+           songs: [
+            { title: '君が代' },
+            { title: '我が黄金のベンガルよ' },
+            { title: '起てコンゴ人よ' },
+            { title: '星条旗' },
+            { title: '目覚めよ、ルーマニア人!'},
+            { title: '美しきルワンダ' },
+          ]
+        },
+        methods:{
+            addTodo: function(newTitle){
+                 this.songs.push({
+                 title: newTitle,
+         });
+         },
+         setMusic: function(songs){
+            console.log(songs);
+            this.songs = []
+         },
+         remove: function(index){
+            this.songs.splice(index,1); 
+         }
+        }
+    })
+</script>
+</html>
+
+
+
+
+
+

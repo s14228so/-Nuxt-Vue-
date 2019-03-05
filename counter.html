@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- Vue.jsを読み込む -->
+</head>
+<body>
+  <!-- appで囲むことでマウント先が決まる -->
+  <div id="app">
+    <!-- @clickはv-on:clickの省略形 -->
+    <button @click="increment">
+     {{ state.count }}
+     <!-- マスタッシュ構文と呼ばれる記法 -->
+     </butoon>
+  </div>
+ 
+
+  
+</body>
+<script>
+  new Vue({
+    el: "#app",
+    // dataを定義することでデータを保持できるようになる
+    data: {
+      state: {
+        count: 0
+      }
+    },
+    methods: {
+      increment(){
+        this.state.count ++
+      }
+    }
+  })
+  
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+	  <ul>
+	    <li v-for="post in posts">
+		    <h2>{{ post.title }}</h2>
+		    <p>{{ post.body }}</p>
+	    </li>
+	  </ul>
+    {{posts[0].title}}
+  </div>
+  
+</body>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      posts: [
+	      {
+      		title: "Railsチュートリアル",
+      		body: "Rails初学者の教本"
+	      },
+	      {
+          title: "Vue.js チュートリアル",
+  	      body: "チュートリアルです"
+	      }
+      ]
+    },
+  
+  })
+</script>
