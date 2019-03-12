@@ -1,75 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Cocoon Sample</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-
-<div id="todo">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cocoon Sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style></style>
+  <body>
+    <div id="todo">
       <h1>Cocoon Sample</h1>
-    <div v-for="(disc, index) in discs">
-  <form @submit.prevent="setMusic(disc.songs)" action="" method="get" class="form-example">
-    <div v-for="(song, idx) in discs[index].songs">
-        {{idx + 1}}: {{song.title}}
-         <input type="button" @click="remove(index, idx)" value="曲を削除" />
-    </div>
-    <input type="text" v-model="title" value="add todo" />
-    <input type="button" @click="addTodo(index, title)" value="曲を追加" />
-    <hr/>
-     <input type="submit" value="complete!">
-  </form>
+      <div v-for="(disc, index) in discs">
+        <form
+          @submit.prevent="setMusic(disc.songs)"
+          action=""
+          method="get"
+          class="form-example"
+        >
+          <div v-for="(song, idx) in discs[index].songs">
+            {{ idx + 1 }}: {{ song.title }}
+            <input type="button" @click="remove(index, idx)" value="曲を削除" />
+          </div>
+          <input type="text" v-model="title" value="add song"/>
+          <input
+            type="button"
+            @click="addSong(index, title, $event)"
+            value="曲を追加"
+          />
+          <hr />
+          <input type="submit" value="保存する" />
+        </form>
       </div>
-  <button @click="addDisc">Disc 追加</button>
-</div>
-
-  
-</body>
-<script>
+      <button @click="addDisc(discs.count)">Disc 追加</button>
+    </div>
+  </body>
+  <script>
     var app = new Vue({
-        el: '#todo',
-        data: {
+      el: "#todo",
+      data: {
         title: "",
-          discs: [
-              {
-                  songs: [
-                    { title: '君が代' },
-                    { title: '我が黄金のベンガルよ' },
-                    { title: '起てコンゴ人よ' },
-                    { title: '星条旗' },
-                    { title: '目覚めよ、ルーマニア人!'},
-                    { title: '美しきルワンダ' },
-                  ]
-              }
-          ]
-           
-        },
-        methods:{
-            addTodo: function(index, newTitle){
-                 this.discs[index].songs.push({
-                 title: newTitle,
-         });
-         },
-         setMusic: function(songs){
-            console.log(songs);
-            this.songs = []
-         },
-         remove: function(index, idx){
-            this.discs[index].songs.splice(idx,1); 
-         },
-         addDisc: function(){
-            this.discs.push({
-                songs: []
-            })
-         }
+        discs: [
+          { id: 1,
+            songs: [
+              { title: "君が代" },
+              { title: "我が黄金のベンガルよ" },
+              { title: "起てコンゴ人よ" },
+              { title: "星条旗" },
+              { title: "目覚めよ、ルーマニア人!" },
+              { title: "美しきルワンダ" }
+            ]
+          }
+        ]
+      },
+      methods: {
+        addSong: function(index, newTitle, event) {
+          if (newTitle === ""){
+           event.preventDefault();
+           console.log("error")
+         } else {
+          this.discs[index].songs.push({
+            title: newTitle
+          });
         }
-    })
-</script>
+        },
+        setMusic: function(songs) {
+            var discs = JSON.stringify(this.discs)
+          console.log(discs);
+          this.songs = [];
+        },
+        remove: function(index, idx) {
+          this.discs[index].songs.splice(idx, 1);
+        },
+        addDisc: function(id) {
+          this.discs.push({
+            id: id+1,
+            songs: []
+          });
+        }
+      }
+    });
+  </script>
 </html>
-
-
-
-
-
-
